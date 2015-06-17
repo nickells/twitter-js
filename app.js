@@ -1,11 +1,16 @@
 var express = require('express');
 var morgan = require('morgan')
+var swig = require('swig')
 var app = express();
 
 app.use(morgan('dev'));
-
+app.engine('html',swig.renderFile);
+app.set('view engine','html')
+app.set('views', __dirname + './views')
 app.get('/', function (req, res) {
   res.send('Hello World!');
+swig.setDefaults({ cache: false });
+
 });
 
 // test
