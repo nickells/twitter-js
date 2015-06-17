@@ -3,7 +3,7 @@ var _ = require('underscore');
 var data = [];
 
 var add = function(name,text) {
-	data.push({name: name, text: text});
+	data.push({name: name, text: text, id: createID(text)});
 }
 var list = function(){
 	return _.clone(data);
@@ -30,8 +30,19 @@ var getFakeTweet = function() {
   return "Fullstack Academy is " + randArrayEl(awesome_adj) + "! The instructors are just so " + randArrayEl(awesome_adj) + ". #fullstacklove #codedreams";
 };
 
+var createID = function(text) {
+	var count = 0;
+	for (var i=0;i<text.length;i++){
+		count+=text.charCodeAt(i)
+	}
+	return count;
+}
+
+
+
 for(var i=0; i<10; i++) {
   module.exports.add( getFakeName(), getFakeTweet() );
 }
 
+add("Nick","This is a tweet");
 console.log(data)
