@@ -9,7 +9,7 @@ var list = function(){
 	return _.clone(data);
 };
 var find = function (properties){
-	return _.where(data,properties);
+	return _.where(properties);
 };
 
 module.exports = {add: add, list: list, find: find};
@@ -33,5 +33,3 @@ var getFakeTweet = function() {
 for(var i=0; i<10; i++) {
   module.exports.add( getFakeName(), getFakeTweet() );
 }
-
-console.log(data)
