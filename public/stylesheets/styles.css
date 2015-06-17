@@ -40,6 +40,22 @@ body {
 code {
   font-size: 80%;
 }
+
+.name {
+  font-size: 12pt;
+  font-weight: bold;
+}
+
+#tweet-text {
+  margin-left: 45px;
+
+}
+
+.avatar {
+  height: 40px;
+  width: 40px;
+
+}
  
 .tweetbox {
   padding: 7px;

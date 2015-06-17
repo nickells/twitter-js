@@ -12,10 +12,29 @@
       100 followers
     </div>
     <div class="col-md-9">
+
+    {% if showForm %}
+  		<form action="/submit" method="POST">
+    		<label for="name_field">Name:</label>
+    		<input name="name" type="text" id="name_field" />
+
+    		<label for="text_field">Text:</label>
+    		<input name="text" type="text" id="text_field" style="width: 350px;" />
+    		<input type="submit" value="Submit" />
+  		</form>
+{% endif %}
     
       <!-- display tweets here -->
       {% for tweet in tweets %}
-        <li>{{tweet.text}}</li>
+      	<div> 
+      		<img src = "http://orig15.deviantart.net/e786/f/2011/307/a/7/troll_scratch_cat_by_darthpickley-d4f02z8.gif" class = "avatar"></img>
+
+      		<span class = "name"><a href="/users/{{tweet.name}}">{{tweet.name}}</a></span>
+			<p id = 'tweet-text'>{{tweet.text}}</p>
+      	</div>
+
+      	
+        
       {% endfor %}
       
     </div>

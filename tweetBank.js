@@ -3,13 +3,14 @@ var _ = require('underscore');
 var data = [];
 
 var add = function(name,text) {
-	data.push({name: name, text: text});
+  //console.log(uniqueID(name));
+	data.push({name: name, text: text, id: uniqueID(name)});
 }
 var list = function(){
 	return _.clone(data);
 };
 var find = function (properties){
-	return _.where(properties);
+	return _.where(data, properties);
 };
 
 module.exports = {add: add, list: list, find: find};
@@ -29,6 +30,15 @@ var getFakeTweet = function() {
   var awesome_adj = ['awesome','breathtaking','amazing','sexy','sweet','cool','wonderful','mindblowing'];
   return "Fullstack Academy is " + randArrayEl(awesome_adj) + "! The instructors are just so " + randArrayEl(awesome_adj) + ". #fullstacklove #codedreams";
 };
+
+var uniqueID = function(text){
+  var accum = 0;
+  for (var i = 0; i < text.length; i++){
+    accum += text.charCodeAt(i);
+  }
+  return accum;
+
+}
 
 for(var i=0; i<10; i++) {
   module.exports.add( getFakeName(), getFakeTweet() );
