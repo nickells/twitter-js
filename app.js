@@ -4,6 +4,12 @@ var swig = require('swig')
 var tweetBank = require ('./tweetBank')
 var app = express();
 
+var routes = require('./routes');
+app.use('/', routes);
+
+//allow static files from public
+app.use(express.static(__dirname + '/public'));
+
 app.use(morgan('dev'));
 
 app.engine('html',swig.renderFile);
@@ -18,13 +24,13 @@ swig.setDefaults({ cache: false });
 var people = [{name: 'Full'}, {name: 'Stacker'}, {name: 'Son'}];
 
 
-app.get('/', function (req, res) {
+// app.get('/', function (req, res) {
 
-// res.send(swig.renderFile('./views/index.html', {title: 'Hall of Fame', people: people}));
-  res.render( 'index.html', {title: 'Hall of Fame', people: people} );
-});
+// // res.send(swig.renderFile('./views/index.html', {title: 'Hall of Fame', people: people}));
+//   res.render( 'index.html', {title: 'Hall of Fame', people: people} );
+// });
 
-// test
+// // test
 
 
 
