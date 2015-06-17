@@ -3,7 +3,20 @@ var morgan = require('morgan')
 var swig = require('swig')
 var tweetBank = require ('./tweetBank')
 var routes = require('./routes');
+var bodyParser = require('body-parser');
+var socketio = require('socket.io');
+
 var app = express();
+
+var jsonParser = bodyParser.json();
+var urlParser = bodyParser.urlencoded({extended: false});
+
+//now, every request body will be transformed into a body object
+//and attached to the request object
+//we can attch this here because here is where
+//all requests will be intercepted
+app.use(jsonParser);
+app.use(urlParser);
 
 app.use(morgan('dev'));
 
@@ -15,7 +28,7 @@ app.set('views', __dirname + '/views')
 
 swig.setDefaults({ cache: false });
 
-app.use('/', routes);
+app.use(routes);
 
 app.use(express.static(__dirname + '/public'));
 
@@ -35,3 +48,5 @@ var server = app.listen(3000, function () {
 
 
 });
+
+var io = socketio.listen(server);
