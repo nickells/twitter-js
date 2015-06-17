@@ -45,4 +45,4 @@ for(var i=0; i<10; i++) {
 }
 
 add("Nick","This is a tweet");
-console.log(data)
+// console.log(data)

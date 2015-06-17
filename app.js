@@ -2,11 +2,20 @@ var express = require('express');
 var morgan = require('morgan')
 var swig = require('swig')
 var tweetBank = require ('./tweetBank')
+var routes = require('./routes');
+var bodyParser = require('body-parser')
+var socketio = require('socket.io')
+
 var app = express();
 
-var routes = require('./routes');
-app.use('/', routes);
+var jsonParser = bodyParser.json();
+var urlParser = bodyParser.urlencoded({ extended: false });
 
+
+app.use(jsonParser);
+app.use(urlParser);
+
+app.use('/', routes);
 //allow static files from public
 app.use(express.static(__dirname + '/public'));
 
@@ -45,5 +54,6 @@ var server = app.listen(3000, function () {
 
   console.log('Server listening at http://%s:%s', host, port);
 
-
 });
+
+var io = socketio.listen(server);
